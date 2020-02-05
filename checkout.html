@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="../../../../favicon.ico" />
+
+    <title>Checkout example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/form-validation.css" rel="stylesheet" />
+
+    <!--Font Awesome-->
+    <script
+      src="https://kit.fontawesome.com/1b23483256.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Candal|Lora"
+      rel="stylesheet"
+    />
+    <script>
+      function session_chk() {
+        if (window.XMLHttpRequest) {
+          var xhr = new XMLHttpRequest();
+        } else {
+          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var uname = this.responseText;
+              var nav_user = document.getElementsByClassName("nav-user")[0];
+              var nav_user_name = document.getElementsByClassName(
+                "nav-username"
+              )[0];
+              nav_user.style.display = "block";
+              nav_user_name.innerHTML = uname;
+              document.getElementsByClassName("nav-login")[0].style.display =
+                "none";
+            }
+          }
+        };
+        xhr.open("GET", "session_chk.php", true);
+        xhr.send();
+      }
+    </script>
+    <script>
+      function logout() {
+        if (window.XMLHttpRequest) {
+          var xhr = new XMLHttpRequest();
+        } else {
+          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var res = this.responseText;
+              var nav_user = document.getElementsByClassName("nav-user")[0];
+              nav_user.style.display = "none";
+              document.getElementsByClassName("nav-login")[0].style.display =
+                "block";
+            }
+          }
+        };
+        xhr.open("GET", "logout.php", true);
+        xhr.send();
+      }
+    </script>
+    <script>
+      function cart_chk() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var res = this.responseText;
+              document.getElementsByClassName(
+                "cart-item-count"
+              )[0].innerHTML = res;
+            }
+          }
+        };
+        xhr.open("GET", "cart_chk.php", true);
+        xhr.send();
+      }
+    </script>
+    <script>
+      function getCart() {
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            //document.getElementById("yo").innerHTML = this.responseText;
+            var txt = this.responseText;
+            var res = txt.split(",");
+            console.log(txt);
+            //res[0] contains 1 item now
+            for (i = 0; i < res.length - 1; i++) {
+              ans = res[i].split(" ");
+              console.log(ans);
+              var title = ans[1];
+              var price = ans[2];
+              var qty = ans[3];
+              console.log(title, price, qty);
+
+              var cartItems = document.getElementsByClassName(
+                "chk-cart-items"
+              )[0];
+              var cartRow = document.createElement("li");
+              cartRow.classList.add(
+                "list-group-item",
+                "d-flex",
+                "justify-content-between",
+                "lh-condensed",
+                "chk-cart-row"
+              );
+              var cartRowContents = `
+                <div>
+                  <h6 class="my-0">${title}</h6>
+                  <small class="text-muted chk-cart-quantity-input">x${qty}</small>
+                </div>
+                <span class="text-muted chk-cart-price">₹${price}</span>`;
+              cartRow.innerHTML = cartRowContents;
+              cartItems.append(cartRow);
+              updateCartTotal();
+            }
+          }
+        };
+        xhttp.open("GET", "chkAddToCart.php", true);
+        xhttp.send();
+      }
+      function updateCartTotal() {
+        var cartItemContainer = document.getElementsByClassName(
+          "chk-cart-items"
+        )[0];
+        var cartRows = cartItemContainer.getElementsByClassName("chk-cart-row");
+        var total = 0;
+        for (var i = 0; i < cartRows.length; i++) {
+          var cartRow = cartRows[i];
+          var priceElement = cartRow.getElementsByClassName("chk-cart-price")[0]
+            .innerText;
+          var qtyElement = cartRow.getElementsByClassName(
+            "chk-cart-quantity-input"
+          )[0].innerText;
+          console.log(
+            "priceElement = " + priceElement + ", qtyElement = " + qtyElement
+          );
+          var price = parseFloat(priceElement.replace("₹", ""));
+          var qty = parseFloat(qtyElement.replace("x", ""));
+          total = total + price * qty;
+        }
+        total = Math.round(total * 100) / 100;
+        document.getElementsByClassName("cart-total-price")[0].innerText =
+          "₹" + total;
+      }
+    </script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body class="bg-light" onload="session_chk(), cart_chk(), getCart()">
+    <header>
+      <span onclick="window.location.href='index.html'">
+        <div class="logo">
+          <h1 class="logo-text">FreshFromFarm <span>(FFF)</span></h1>
+        </div>
+      </span>
+      <i class="fa fa-bars menu-toggle"></i>
+      <ul class="navb">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about_us.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li class="nav-login">
+          <a href="login_transparent.html"
+            ><i class="fas fa-sign-in-alt"></i>Login</a
+          >
+        </li>
+        <li class="nav-user">
+          <a href="index.html">
+            <i class="fa fa-user"></i>
+            <span class="nav-username"></span>
+            <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+          </a>
+          <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="#" onclick="logout()" class="logout">LogOut</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+    <div class="container">
+      <div class="py-5 text-center">
+        <img
+          class="d-block mx-auto mb-4"
+          src="images/checkout.jpeg"
+          alt=""
+          width="150"
+          height="100"
+        />
+        <h2>Checkout form</h2>
+        <!--<p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>-->
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Your cart</span>
+            <span class="badge badge-secondary badge-pill cart-item-count"
+              >0</span
+            >
+          </h4>
+          <ul class="list-group mb-3 chk-cart-items">
+            <!--<li
+              class="list-group-item d-flex justify-content-between lh-condensed chk-cart-row"
+            >
+              <div>
+                <h6 class="my-0">Product name</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$12</span>
+            </li>
+
+            <li
+              class="list-group-item d-flex justify-content-between lh-condensed"
+            >
+              <div>
+                <h6 class="my-0">Second product</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$8</span>
+            </li>
+
+            <li
+              class="list-group-item d-flex justify-content-between lh-condensed"
+            >
+              <div>
+                <h6 class="my-0">Third item</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$5</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <span class="text-success">-$5</span>
+            </li>-->
+
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong class="cart-total-price">$20</strong>
+            </li>
+          </ul>
+
+          <form class="card p-2">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Promo code"
+              />
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary">Redeem</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Billing address</h4>
+          <form class="needs-validation" novalidate>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName">First name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  placeholder=""
+                  value=""
+                  required
+                />
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Last name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  placeholder=""
+                  value=""
+                  required
+                />
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="username">Username</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  placeholder="Username"
+                  required
+                />
+                <div class="invalid-feedback" style="width: 100%;">
+                  Your username is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email"
+                >Email <span class="text-muted">(Optional)</span></label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="you@example.com"
+              />
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="address">Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                placeholder="1234 Main St"
+                required
+              />
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="address2"
+                >Address 2 <span class="text-muted">(Optional)</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="address2"
+                placeholder="Apartment or suite"
+              />
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="country">Country</label>
+                <select
+                  class="custom-select d-block w-100"
+                  id="country"
+                  required
+                >
+                  <option value="">Choose...</option>
+                  <option>United States</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="state">State</label>
+                <select class="custom-select d-block w-100" id="state" required>
+                  <option value="">Choose...</option>
+                  <option>California</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please provide a valid state.
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="zip">Zip</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="zip"
+                  placeholder=""
+                  required
+                />
+                <div class="invalid-feedback">
+                  Zip code required.
+                </div>
+              </div>
+            </div>
+            <hr class="mb-4" />
+            <div class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="same-address"
+              />
+              <label class="custom-control-label" for="same-address"
+                >Shipping address is the same as my billing address</label
+              >
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="save-info"
+              />
+              <label class="custom-control-label" for="save-info"
+                >Save this information for next time</label
+              >
+            </div>
+            <hr class="mb-4" />
+
+            <h4 class="mb-3">Payment</h4>
+
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input
+                  id="credit"
+                  name="paymentMethod"
+                  type="radio"
+                  class="custom-control-input"
+                  checked
+                  required
+                />
+                <label class="custom-control-label" for="credit"
+                  >Credit card</label
+                >
+              </div>
+              <div class="custom-control custom-radio">
+                <input
+                  id="debit"
+                  name="paymentMethod"
+                  type="radio"
+                  class="custom-control-input"
+                  required
+                />
+                <label class="custom-control-label" for="debit"
+                  >Debit card</label
+                >
+              </div>
+              <div class="custom-control custom-radio">
+                <input
+                  id="paypal"
+                  name="paymentMethod"
+                  type="radio"
+                  class="custom-control-input"
+                  required
+                />
+                <label class="custom-control-label" for="paypal">Paypal</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cc-name">Name on card</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cc-name"
+                  placeholder=""
+                  required
+                />
+                <small class="text-muted">Full name as displayed on card</small>
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cc-number">Credit card number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cc-number"
+                  placeholder=""
+                  required
+                />
+                <div class="invalid-feedback">
+                  Credit card number is required
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Expiration</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cc-expiration"
+                  placeholder=""
+                  required
+                />
+                <div class="invalid-feedback">
+                  Expiration date required
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">CVV</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cc-cvv"
+                  placeholder=""
+                  required
+                />
+                <div class="invalid-feedback">
+                  Security code required
+                </div>
+              </div>
+            </div>
+            <hr class="mb-4" />
+            <button
+              class="btn btn-primary btn-lg btn-block"
+              type="submit"
+              onclick="window.location.href='cart.html'"
+            >
+              Continue to checkout
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-2018 FreshFromFarm</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>'
+        );
+    </script>
+    <script src="../../../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../../../dist/js/bootstrap.min.js"></script>
+    <script src="../../../../assets/js/vendor/holder.min.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        "use strict";
+
+        window.addEventListener(
+          "load",
+          function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName("needs-validation");
+
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener(
+                "submit",
+                function(event) {
+                  if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                  form.classList.add("was-validated");
+                },
+                false
+              );
+            });
+          },
+          false
+        );
+      })();
+    </script>
+  </body>
+</html>

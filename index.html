@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--the bg image should be cahnged or something it restricts the height and the footer 
+    in order.html file is sticking to a certain limit-->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="device-width, initial-scale = 1.0" />
+    <meta http-equiv="X-UA-compatible" content="ie=edge" />
+    <title>FreshFromFarm (FFF)</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <!--Font Awesome-->
+    <script
+      src="https://kit.fontawesome.com/1b23483256.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Candal|Lora"
+      rel="stylesheet"
+    />
+
+    <script>
+      function session_chk() {
+        if (window.XMLHttpRequest) {
+          var xhr = new XMLHttpRequest();
+        } else {
+          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var uname = this.responseText;
+              var nav_user = document.getElementsByClassName("nav-user")[0];
+              var nav_user_name = document.getElementsByClassName(
+                "nav-username"
+              )[0];
+              nav_user.style.display = "block";
+              nav_user_name.innerHTML = uname;
+              document.getElementsByClassName("nav-login")[0].style.display =
+                "none";
+            }
+          }
+        };
+        xhr.open("GET", "session_chk.php", true);
+        xhr.send();
+      }
+    </script>
+    <script>
+      function logout() {
+        if (window.XMLHttpRequest) {
+          var xhr = new XMLHttpRequest();
+        } else {
+          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var res = this.responseText;
+              var nav_user = document.getElementsByClassName("nav-user")[0];
+              nav_user.style.display = "none";
+              document.getElementsByClassName("nav-login")[0].style.display =
+                "block";
+            }
+          }
+        };
+        xhr.open("GET", "logout.php", true);
+        xhr.send();
+      }
+    </script>
+  </head>
+
+  <body onload="session_chk()">
+    <header>
+      <span onclick="window.location.href='index.html'">
+        <div class="logo">
+          <h1 class="logo-text">FreshFromFarm <span>(FFF)</span></h1>
+        </div>
+      </span>
+      <i class="fa fa-bars menu-toggle"></i>
+      <ul class="navb">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about_us.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li class="nav-login">
+          <a href="login_transparent.html"
+            ><i class="fas fa-sign-in-alt"></i>Login</a
+          >
+        </li>
+        <li class="nav-user">
+          <a href="index.html">
+            <i class="fa fa-user"></i>
+            <span class="nav-username"></span>
+            <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+          </a>
+          <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="#" onclick="logout()" class="logout">LogOut</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+
+    <!--Page Wrapper-->
+    <div class="page-wrapper">
+      <!--post slider & slick js-->
+      <div class="post-slider">
+        <h1 class="slider-title">.</h1>
+        <i class="fas fa-chevron-left prev"></i>
+        <i class="fas fa-chevron-right next"></i>
+
+        <div class="post-wrapper">
+          <div class="post">
+            <img src="images/goods-crate.jpg" alt="" class="slider-image" />
+            <div class="post-info">
+              <h4><a href="order.html">Order Grocery Online!</a></h4>
+              <i class="fa fa-shopping-cart" aria-hidden="true"> Shop Now!!</i>
+            </div>
+          </div>
+
+          <div class="post">
+            <img src="images/fresh-produce.jpg" alt="" class="slider-image" />
+            <div class="post-info">
+              <h4><a href="about_us.html">Read more about the goods!</a></h4>
+              <i class="fa fa-leaf" aria-hidden="true"> Fresh goods :)</i>
+            </div>
+          </div>
+
+          <div class="post">
+            <img src="images/delivery.jpeg" alt="" class="slider-image" />
+            <div class="post-info">
+              <h4><a href="#">Hassle free delivery!</a></h4>
+              <i class="fa fa-truck" aria-hidden="true"> Home Delivery!!</i>
+            </div>
+          </div>
+
+          <div class="post">
+            <img src="images/sign-up-now.jpg" alt="" class="slider-image" />
+            <div class="post-info">
+              <h4><a href="signUp_transparent.html">Sign up!</a></h4>
+              <i class="fa fa-sign-in" aria-hidden="true"> Register Today!</i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--post slider-->
+    </div>
+    <!--//Page Wrapper-->
+
+    <!--Footer-->
+    <div class="footer">
+      <!--<div class="footer-content">
+                <div class="footer-section about"></div>
+                <div class="footer-section links"></div>
+                <div class="footer-section contact-form"></div>
+            </div>-->
+
+      <div class="footer-bottom">
+        &copy; FreshFromFarm.com | Designed by AtharvaCM & ShubhamDM
+      </div>
+    </div>
+    <!--//Footer-->
+
+    <!--JQuery-->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+
+    <!--Slick Carousel-->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+
+    <!--Custom Script-->
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

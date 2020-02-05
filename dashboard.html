@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive vertical menu navigation</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:700, 600,500,400,300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="js/main.js"></script>
+
+    <style>
+      .ad {
+        position: absolute;
+        width: 300px;
+        height: 250px;
+        border: 1px solid #ddd;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 250px;
+        z-index: 10;
+        display: none;
+      }
+      .ad .close {
+        position: absolute;
+        font-family: "ionicons";
+        width: 20px;
+        height: 20px;
+        color: #fff;
+        background-color: #999;
+        font-size: 20px;
+        left: -20px;
+        top: -1px;
+        display: table-cell;
+        vertical-align: middle;
+        cursor: pointer;
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript">
+      $(function() {
+        $(".close").click(function() {
+          $(".ad").css("display", "none");
+        });
+      });
+    </script>
+    <script>
+      function session_chk() {
+        if (window.XMLHttpRequest) {
+          var xhr = new XMLHttpRequest();
+        } else {
+          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var uname = this.responseText;
+              var nav_user = document.getElementsByClassName("nav-user")[0];
+              var nav_user_name = document.getElementsByClassName(
+                "nav-username"
+              )[0];
+              nav_user.style.display = "block";
+              nav_user_name.innerHTML = uname;
+              document.getElementsByClassName("nav-login")[0].style.display =
+                "none";
+            }
+          }
+        };
+        xhr.open("GET", "session_chk.php", true);
+        xhr.send();
+      }
+    </script>
+    <script>
+      function logout() {
+        if (window.XMLHttpRequest) {
+          var xhr = new XMLHttpRequest();
+        } else {
+          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var res = this.responseText;
+              var nav_user = document.getElementsByClassName("nav-user")[0];
+              nav_user.style.display = "none";
+              document.getElementsByClassName("nav-login")[0].style.display =
+                "block";
+            }
+          }
+        };
+        xhr.open("GET", "logout.php", true);
+        xhr.send();
+      }
+    </script>
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/1b23483256.js" crossorigin="anonymous"></script>
+    
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Candal|Lora" rel="stylesheet" />
+  </head>
+  <body onload="session_chk()">
+    <header>
+      <span onclick="window.location.href='index.html'">
+        <div class="logo">
+          <h1 class="logo-text">FreshFromFarm <span>(FFF)</span></h1>
+        </div>
+      </span>
+      <i class="fa fa-bars menu-toggle"></i>
+      <ul class="navb">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about_us.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li class="nav-login">
+          <a href="login_transparent.html"><i class="fas fa-sign-in-alt"></i>Login</a>
+        </li>
+        <li class="nav-user">
+          <a href="index.html">
+            <i class="fa fa-user"></i>
+            <span class="nav-username"></span>
+            <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+          </a>
+          <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="#" onclick="logout()" class="logout">LogOut</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+    <div class="cont">
+    <div class="header">
+      <div class="logo">
+        <i class="fa fa-tachometer"></i>
+        <span>FFF</span>
+      </div>
+      <h3>FreshFromFarm</h3>
+      <a href="#" class="nav-trigger"><span></span></a>
+    </div>
+    <div class="side-nav">
+      <div class="logo">
+        <i class="fa fa-tachometer"></i>
+        <span>FFF</span>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">
+              <span><i class="fa fa-user"></i></span>
+              <span>Users</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span><i class="fa fa-envelope"></i></span>
+              <span>Messages</span>
+            </a>
+          </li>
+          <li class="active">
+            <a href="#">
+              <span><i class="fa fa-bar-chart"></i></span>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <!--				<li>
+						<a href="#">
+							<span><i class="fa fa-credit-card-alt"></i></span>
+							<span>Payments</span>
+						</a>   
+					</li>   -->
+        </ul>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div class="title">
+        Analytics
+      </div>
+      <div class="ad">
+        <div class="close">
+          <i class="ion-ios-close-empty"></i>
+        </div>
+        <script
+          async
+          src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        ></script>
+        <!-- kodhus demos -->
+        <ins
+          class="adsbygoogle"
+          style="display:inline-block;width:300px;height:250px"
+          data-ad-client="ca-pub-8408356133845039"
+          data-ad-slot="8154430505"
+        ></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+      <div class="main">
+        <div class="widget">
+          <div class="title">Number of Views</div>
+          <div class="chart">
+            <p>
+              <br />No View for the page at the beginning.<br /><br /><br /><br />
+              <h1>0</h1>
+            </p>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="title">Number of Likes</div>
+          <div class="chart">
+            <p>
+              <br />No Likes for the page at the beginning.<br /><br /><br /><br />
+              <h1>0</h1>
+            </p>
+          </div>
+        </div>
+        <div class="widget">
+          <div class="title">Number of Comments</div>
+          <div class="chart">
+            <p>
+              <br />No Comments for the page at the beginning.<br /><br /><br />
+              <h1>0</h1>
+            </p>
+          </div>
+        </div>
+      </div>
+    
+    <div class="gg">
+      <img class="img" src="images/graph.jpg" />
+      <img class="img1" src="images/g1.jpg" />
+	</div>
+  </div>
+  </div>
+  </body>
+</html>

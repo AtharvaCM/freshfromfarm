@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--the bg image should be cahnged or something it restricts the height and the footer 
+    in order.html file is sticking to a certain limit-->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="device-width, initial-scale = 1.0" />
+    <meta http-equiv="X-UA-compatible" content="ie=edge" />
+    <title>FreshFromFarm (FFF)</title>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <!--
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+      type="text/css"
+    />
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--Font Awesome-->
+    <script
+      src="https://kit.fontawesome.com/1b23483256.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Candal|Lora"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script>
+      function session_chk() {
+        if (window.XMLHttpRequest) {
+          var xhr = new XMLHttpRequest();
+        } else {
+          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var uname = this.responseText;
+              var nav_user = document.getElementsByClassName("nav-user")[0];
+              var nav_user_name = document.getElementsByClassName(
+                "nav-username"
+              )[0];
+              nav_user.style.display = "block";
+              nav_user_name.innerHTML = uname;
+              document.getElementsByClassName("nav-login")[0].style.display =
+                "none";
+            }
+          }
+        };
+        xhr.open("GET", "session_chk.php", true);
+        xhr.send();
+      }
+    </script>
+    <script>
+      function logout() {
+        if (window.XMLHttpRequest) {
+          var xhr = new XMLHttpRequest();
+        } else {
+          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var res = this.responseText;
+              var nav_user = document.getElementsByClassName("nav-user")[0];
+              nav_user.style.display = "none";
+              document.getElementsByClassName("nav-login")[0].style.display =
+                "block";
+            }
+          }
+        };
+        xhr.open("GET", "logout.php", true);
+        xhr.send();
+      }
+    </script>
+  </head>
+
+  <body onload="session_chk()">
+    <header>
+      <span onclick="window.location.href='index.html'">
+        <div class="logo">
+          <h1 class="logo-text">FreshFromFarm <span>(FFF)</span></h1>
+        </div>
+      </span>
+      <i class="fa fa-bars menu-toggle"></i>
+      <ul class="navb">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about_us.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li class="nav-login">
+          <a href="login_transparent.html"
+            ><i class="fas fa-sign-in-alt"></i>Login</a
+          >
+        </li>
+        <li class="nav-user">
+          <a href="index.html">
+            <i class="fa fa-user"></i>
+            <span class="nav-username"></span>
+            <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+          </a>
+          <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="#" onclick="logout()" class="logout">LogOut</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+
+    <!--main-->
+    <div id="about" class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8">
+          <h2>About Company Page</h2>
+          <br />
+          <h4>
+            <span style="color: #008489; font-weight: bold;"
+              >&nbsp;&nbsp;&nbsp;&nbsp;FreshFromFarm</span
+            >
+            is a portal for farmers to sell their goods directly to the
+            customers from which the farmers will get a justifiable amount
+            <i class="fas fa-rupee-sign"></i>
+            for their products.
+          </h4>
+          <br />
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp; For many years in India we keep hearing
+            'farmer commited suicide' for various reasons, one of which is, not
+            getting fair price for the goods they are producing. We shop at the
+            market or a mart where we need to pay a significant amount for our
+            vegetables. But most oftenly this amount contains a cut for the
+            mediators who bring you the vegetables or the goods from the
+            farmers. This is okay if they are paying enough to the producers for
+            all the work they put in but this is not the case. ergo, we at
+            FreshFromFarm have taken the initiative to provide a platform for
+            the 'Kisan'(s) of the India to sell their products for a just price
+            and with no greedy mediators.
+          </p>
+          <br /><button class="btn btn-default btn-lg">Get in Touch</button>
+        </div>
+        <div class="col-sm-4">
+          <!--</span> class="glyphicon glyphicon-signal logo"</span>></span>-->
+          <span
+            ><img
+              src="images/farmer.jpg"
+              alt="glyphicon glyphicon-signal logo"
+              class="farmer-img"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid bg-grey">
+      <div class="row">
+        <div class="col-sm-4">
+          <span class="glyphicon glyphicon-globe logo slideanim"></span>
+        </div>
+        <div class="col-sm-8">
+          <h2>Our Values</h2>
+          <br />
+          <h4>
+            <strong>MISSION:</strong> Our mission is to help farmers get the
+            amount they deserve for their produce and to make these goods
+            available for the common man of India for a reasonable price.
+          </h4>
+          <br />
+          <p>
+            <strong>VISION:</strong> Our VISION is to make India digital and
+            include farmers as well as the daily customers dive into E-Commerce.
+            <p class="high" style="color: orangered; font-size: large;"
+              >Jai Jawan, Jai Kisan</p
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--Footer-->
+    <div class="footer">
+      <!--<div class="footer-content">
+                    <div class="footer-section about"></div>
+                    <div class="footer-section links"></div>
+                    <div class="footer-section contact-form"></div>
+                </div>-->
+
+      <div class="footer-bottom">
+        &copy; FreshFromFarm.com | Designed by AtharvaCM & ShubhamDM
+      </div>
+    </div>
+    <!--//Footer-->
+
+    <!--Custom Script-->
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <title>Transparent Login Form Design</title>
+    <!--link rel="stylesheet" type="text/css" href="css/login_transparent.css">-->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="device-width, initial-scale = 10." />
+    <meta http-equiv="X-UA-compatible" content="ie=edge" />
+
+    <!--Font Awesome-->
+    <script
+      src="https://kit.fontawesome.com/1b23483256.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Candal|Lora"
+      rel="stylesheet"
+    />
+
+    <!--Validate Script-->
+    <script>
+      function validate() {}
+    </script>
+  </head>
+  <body style="background: url(images/image.jpg) center/cover no-repeat;">
+    <header>
+      <span onclick="window.location.href='index.html'">
+        <div class="logo">
+          <h1 class="logo-text">FreshFromFarm <span>(FFF)</span></h1>
+        </div>
+      </span>
+      <i class="fa fa-bars menu-toggle"></i>
+      <ul class="navb">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about_us.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li class="nav-login">
+          <a href="login_transparent.html"
+            ><i class="fas fa-sign-in-alt"></i>Login</a
+          >
+        </li>
+        <li class="nav-user">
+          <a href="index.html">
+            <i class="fa fa-user"></i>
+            <span class="nav-username">AtharvaCM</span>
+            <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+          </a>
+          <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="index.html" class="logout">LogOut</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+    <div class="login-box">
+      <img src="images/avatar2.png" class="avatar" />
+      <h1>Login Here</h1>
+      <form action="login.php" method="POST">
+        <p>Username</p>
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter Username"
+          required
+        />
+        <p>Password</p>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter Password"
+          required
+        />
+        <!--<input type="submit" name="submit" value="Login">-->
+        <button type="submit" name="submit">Login</button>
+        <a href="#">Forget Password</a>
+        <button
+          type="button"
+          class="cancelbtn"
+          onclick="window.location.href='index.html'"
+        >
+          Cancel
+        </button>
+      </form>
+
+      <div class="reg">
+        <p>Don't have an account?</p>
+        <p>Register here</p>
+        <button
+          type="button"
+          class="regbtn"
+          onclick="window.location.href='signUp_transparent.html'"
+        >
+          Sign Up
+        </button>
+      </div>
+    </div>
+
+    <!--Footer-->
+    <div class="footer">
+      <!--<div class="footer-content">
+                <div class="footer-section about"></div>
+                <div class="footer-section links"></div>
+                <div class="footer-section contact-form"></div>
+            </div>-->
+
+      <div class="footer-bottom">
+        &copy; FreshFromFarm.com | Designed by AtharvaCM
+      </div>
+    </div>
+    <!--//Footer-->
+
+    <!--JQuery-->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+
+    <!--Custom Script-->
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

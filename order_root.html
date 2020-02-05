@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="device-width, initial-scale = 10." />
+    <meta http-equiv="X-UA-compatible" content="ie=edge" />
+    <title>FreshFromFarm (FFF) | order_root</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <script>
+      function bgfunc() {
+        document.body.style.background = "rgb(240,240,240)";
+      }
+    </script>
+
+    <!--Font Awesome-->
+    <script
+      src="https://kit.fontawesome.com/1b23483256.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Candal|Lora"
+      rel="stylesheet"
+    />
+    <script>
+      function session_chk() {
+        if (window.XMLHttpRequest) {
+          var xhr = new XMLHttpRequest();
+        } else {
+          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var uname = this.responseText;
+              var nav_user = document.getElementsByClassName("nav-user")[0];
+              var nav_user_name = document.getElementsByClassName(
+                "nav-username"
+              )[0];
+              nav_user.style.display = "block";
+              nav_user_name.innerHTML = uname;
+              document.getElementsByClassName("nav-login")[0].style.display =
+                "none";
+            }
+          }
+        };
+        xhr.open("GET", "session_chk.php", true);
+        xhr.send();
+      }
+    </script>
+    <script>
+      function logout() {
+        if (window.XMLHttpRequest) {
+          var xhr = new XMLHttpRequest();
+        } else {
+          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var res = this.responseText;
+              var nav_user = document.getElementsByClassName("nav-user")[0];
+              nav_user.style.display = "none";
+              document.getElementsByClassName("nav-login")[0].style.display =
+                "block";
+              window.location.href = "index.html";
+            }
+          }
+        };
+        xhr.open("GET", "logout.php", true);
+        xhr.send();
+      }
+    </script>
+    <script>
+      function cart_chk() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var res = this.responseText;
+              document.getElementsByClassName(
+                "cart-item-no"
+              )[0].innerHTML = res;
+            }
+          }
+        };
+        xhr.open("GET", "cart_chk.php", true);
+        xhr.send();
+      }
+    </script>
+    <script>
+      function cart_chk() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 || this.status == 200) {
+            if (this.responseText != false) {
+              var res = this.responseText;
+              document.getElementsByClassName(
+                "cart-item-no"
+              )[0].innerHTML = res;
+            }
+          }
+        };
+        xhr.open("GET", "cart_chk.php", true);
+        xhr.send();
+      }
+    </script>
+  </head>
+
+  <body onload="bgfunc(), session_chk(), cart_chk()">
+    <header>
+      <span onclick="window.location.href='index.html'">
+        <div class="logo">
+          <h1 class="logo-text">FreshFromFarm <span>(FFF)</span></h1>
+        </div>
+      </span>
+      <i class="fa fa-bars menu-toggle"></i>
+      <ul class="navb">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about_us.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li class="cart-div" onclick="window.location.href='cart.html'">
+          <div class="cart-btn">
+            <span class="nav-icon"></span>
+            <i class="fas fa-cart-plus" aria-hidden="true"></i>
+            <div class="cart-item-no">0</div>
+          </div>
+        </li>
+        <li class="nav-login">
+          <a href="login_transparent.html"
+            ><i class="fas fa-sign-in-alt"></i>Login</a
+          >
+        </li>
+        <li class="nav-user">
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span class="nav-username">AtharvaCM</span>
+            <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+          </a>
+          <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a onclick="logout()" class="logout">LogOut</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+
+    <!--content-->
+    <div class="content clearfix">
+      <div class="sidebar">
+        <div class="section search">
+          <h2 class="section-title">Search</h2>
+          <form action="index.html" method="post">
+            <input
+              type="text"
+              name="search-term"
+              class="text-input"
+              placeholder="Search...."
+            />
+          </form>
+        </div>
+
+        <div class="section catagories">
+          <h2 class="section-title">Catagories</h2>
+          <ul>
+            <li><a href="order.html">Main Order Page</a></li>
+            <li><a href="order_root.html">Root</a></li>
+            <li><a href="order_fruit.html">Fruit</a></li>
+            <li><a href="order_seed.html">Seed</a></li>
+            <li><a href="order_leaves.html">Leaves</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="item">
+          <img src="images/carrot.jpg" alt="" class="item-image" />
+          <div class="item-info">
+            <h3><span class="item-name">Carrot</span></h3>
+            <span class="item-id" style="display: none;">504</span>
+            <h4>
+              Item-rate: <span class="item-price">12</span>&nbsp;
+              <select name="qty" id="qty" class="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </h4>
+            <i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i>
+            <button class="itm-btn">
+              <p class="itm-btn-txt">Add to cart</p>
+            </button>
+          </div>
+        </div>
+
+        <div class="item">
+          <img src="images/raddish.jpeg" alt="" class="item-image" />
+          <div class="item-info">
+            <h3><span class="item-name">Raddish</span></h3>
+            <span class="item-id" style="display: none;">505</span>
+            <h4>
+              Item-rate: <span class="item-price">12</span>&nbsp;
+              <select name="qty" id="qty" class="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </h4>
+            <i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i>
+            <button class="itm-btn">
+              <p class="itm-btn-txt">Add to cart</p>
+            </button>
+          </div>
+        </div>
+
+        <div class="item">
+          <img src="images/beet.jpg" alt="" class="item-image" />
+          <div class="item-info">
+            <h3><span class="item-name">Beets</span></h3>
+            <span class="item-id" style="display: none;">506</span>
+            <h4>
+              Item-rate: <span class="item-price">12</span>&nbsp;
+              <select name="qty" id="qty" class="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </h4>
+            <i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i>
+            <button class="itm-btn">
+              <p class="itm-btn-txt">Add to cart</p>
+            </button>
+          </div>
+        </div>
+
+        <div class="item">
+          <img src="images/sweetpotato.jpg" alt="" class="item-image" />
+          <div class="item-info">
+            <h3><span class="item-name">Sweet Potato</span></h3>
+            <span class="item-id" style="display: none;">507</span>
+            <h4>
+              Item-rate: <span class="item-price">12</span>&nbsp;
+              <select name="qty" id="qty" class="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </h4>
+            <i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i>
+            <button class="itm-btn">
+              <p class="itm-btn-txt">Add to cart</p>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="chkout">
+        <button
+          class="chkout-btn"
+          onclick="window.location.href='checkout.html'"
+        >
+          Proceed to checkout
+        </button>
+      </div>
+    </div>
+    <!--//content-->
+
+    <!--Footer-->
+    <div class="footer">
+      <!--<div class="footer-content">
+                <div class="footer-section about"></div>
+                <div class="footer-section links"></div>
+                <div class="footer-section contact-form"></div>
+            </div>-->
+
+      <div class="footer-bottom">
+        &copy; FreshFromFarm.com | Designed by AtharvaCM
+      </div>
+    </div>
+    <!--//Footer-->
+
+    <!--JQuery-->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+
+    <!--Slick Carousel-->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+
+    <!--Custom Script-->
+    <script type="text/javascript" src="js/order.js" async></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
