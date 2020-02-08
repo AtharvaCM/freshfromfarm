@@ -31,7 +31,7 @@ function ready() {
   var xhttp;
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState == 4) {
       //document.getElementById("yo").innerHTML = this.responseText;
       var txt = this.responseText;
       var res = txt.split(",");
@@ -71,7 +71,7 @@ function ready() {
       }
     }
   };
-  xhttp.open("GET", "addToCart.php", true);
+  xhttp.open("GET", "php/addToCart.php", true);
   xhttp.send();
 }
 
@@ -91,11 +91,11 @@ function removeCartItem(event) {
   var title = shopItem.getElementsByClassName("cart-item-title")[0].innerText;
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
-    if (this.readyState == 4 || this.status == 200) {
+    if (this.readyState == 4) {
       console.log(title);
     }
   };
-  xhr.open("GET", "remove_cart.php?title=" + title, true);
+  xhr.open("GET", "php/remove_cart.php?title=" + title, true);
   xhr.send();
   buttonClicked.parentElement.parentElement.remove();
   updateCartTotal();
