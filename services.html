@@ -29,10 +29,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!--Font Awesome-->
-    <script
-      src="https://kit.fontawesome.com/1b23483256.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" type="text/css" href="css/all.css" />
 
     <!--Google fonts-->
     <link
@@ -49,7 +46,7 @@
         }
 
         xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
+          if (this.readyState == 4) {
             if (this.responseText != false) {
               var uname = this.responseText;
               var nav_user = document.getElementsByClassName("nav-user")[0];
@@ -63,7 +60,7 @@
             }
           }
         };
-        xhr.open("GET", "session_chk.php", true);
+        xhr.open("GET", "php/session_chk.php", true);
         xhr.send();
       }
     </script>
@@ -75,7 +72,7 @@
           var xhr = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
+          if (this.readyState == 4) {
             if (this.responseText != false) {
               var res = this.responseText;
               var nav_user = document.getElementsByClassName("nav-user")[0];
@@ -85,7 +82,7 @@
             }
           }
         };
-        xhr.open("GET", "logout.php", true);
+        xhr.open("GET", "php/logout.php", true);
         xhr.send();
       }
     </script>

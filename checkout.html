@@ -19,10 +19,7 @@
     <link href="css/form-validation.css" rel="stylesheet" />
 
     <!--Font Awesome-->
-    <script
-      src="https://kit.fontawesome.com/1b23483256.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" type="text/css" href="css/all.css" />
 
     <!--Google fonts-->
     <link
@@ -38,7 +35,7 @@
         }
 
         xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
+          if (this.readyState == 4) {
             if (this.responseText != false) {
               var uname = this.responseText;
               var nav_user = document.getElementsByClassName("nav-user")[0];
@@ -52,7 +49,7 @@
             }
           }
         };
-        xhr.open("GET", "session_chk.php", true);
+        xhr.open("GET", "php/session_chk.php", true);
         xhr.send();
       }
     </script>
@@ -64,7 +61,7 @@
           var xhr = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
+          if (this.readyState == 4) {
             if (this.responseText != false) {
               var res = this.responseText;
               var nav_user = document.getElementsByClassName("nav-user")[0];
@@ -74,7 +71,7 @@
             }
           }
         };
-        xhr.open("GET", "logout.php", true);
+        xhr.open("GET", "php/logout.php", true);
         xhr.send();
       }
     </script>
@@ -82,7 +79,7 @@
       function cart_chk() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
+          if (this.readyState == 4) {
             if (this.responseText != false) {
               var res = this.responseText;
               document.getElementsByClassName(
@@ -91,7 +88,7 @@
             }
           }
         };
-        xhr.open("GET", "cart_chk.php", true);
+        xhr.open("GET", "php/cart_chk.php", true);
         xhr.send();
       }
     </script>
@@ -100,7 +97,7 @@
         var xhttp;
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
+          if (this.readyState == 4) {
             //document.getElementById("yo").innerHTML = this.responseText;
             var txt = this.responseText;
             var res = txt.split(",");
@@ -137,7 +134,7 @@
             }
           }
         };
-        xhttp.open("GET", "chkAddToCart.php", true);
+        xhttp.open("GET", "php/chkAddToCart.php", true);
         xhttp.send();
       }
       function updateCartTotal() {

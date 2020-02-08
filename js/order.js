@@ -22,31 +22,79 @@ function ready() {
 
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
-      if (this.readyState == 4 || this.status == 200) {
+      if (this.readyState == 4) {
         var res = this.responseText;
         console.log("response = " + res);
         price = parseInt(res);
         itemElement.getElementsByClassName("item-price")[0].innerHTML = price;
       }
     };
-    xhr.open("GET", "getItemPrice.php?itemId=" + parseFloat(itemId), false);
+    xhr.open("GET", "php/getItemPrice.php?itemId=" + parseFloat(itemId), false);
     xhr.send();
+    //get all the values as a single response so the page loads faster and get it as a xml or json
+    //not from the DB but from the files and if you update any rate change the files so no need to
+    //contact the DB everytime a page loads
   }
 }
 
-function ajaxGetItemPrice(itemId) {}
+function showResult(str) {
+  if (str.length == 0) {
+    document.getElementById("livesearch").innerHTML = "";
+    document.getElementById("livesearch").style.border = "0px";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp = new XMLHttpRequest();
+  } else {
+    // code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4) {
+      document.getElementById("livesearch").innerHTML = this.responseText;
+      document.getElementById("livesearch").style.border = "1px solid #A5ACB2";
+    }
+  };
+  xmlhttp.open("GET", "php/livesearch.php?q=" + str, true);
+  xmlhttp.send();
+}
+
+function session_chk() {
+  if (window.XMLHttpRequest) {
+    var xhr = new XMLHttpRequest();
+  } else {
+    var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+  xhr.onreadystatechange = function() {
+    if (this.readyState == 4) {
+      console.log(this.responseText);
+      if (this.responseText != false) {
+        var uname = this.responseText;
+        var nav_user = document.getElementsByClassName("nav-user")[0];
+        var nav_user_name = document.getElementsByClassName("nav-username")[0];
+        nav_user.style.display = "block";
+        nav_user_name.innerHTML = uname;
+        document.getElementsByClassName("nav-login")[0].style.display = "none";
+      }
+    }
+  };
+  xhr.open("GET", "php/session_chk.php", true);
+  xhr.send();
+}
 
 function cart_chk() {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
-    if (this.readyState == 4 || this.status == 200) {
+    if (this.readyState == 4) {
       if (this.responseText != false) {
         var res = this.responseText;
         document.getElementsByClassName("cart-item-no")[0].innerHTML = res;
       }
     }
   };
-  xhr.open("GET", "cart_chk.php", true);
+  xhr.open("GET", "php/cart_chk.php", true);
   xhr.send();
 }
 
@@ -66,16 +114,15 @@ function addToCartClicked() {
   }
 
   xhr.onreadystatechange = function() {
-    if (this.readyState == 4 || this.status == 200) {
+    if (this.readyState == 4) {
       var tmp = this.responseText;
       console.log(tmp);
       if (!isNaN(tmp)) {
         document.getElementsByClassName("cart-item-no")[0].innerHTML = tmp;
+        alert("Item added in cart");
       }
-
-      alert("Item added in cart");
     }
   };
-  xhr.open("POST", "cart.php?item_id=" + item_id + "&qty=" + qty, true);
+  xhr.open("POST", "php/cart.php?item_id=" + item_id + "&qty=" + qty, true);
   xhr.send();
 }

@@ -12,14 +12,14 @@ function ready() {
     }
 
     xhr.onreadystatechange = function() {
-      if (this.readyState == 4 || this.status == 200) {
+      if (this.readyState == 4) {
         if (this.responseText != false) {
           document.getElementsByClassName("nav-user")[0].style.display = block;
           document.getElementsByClassName("nav-login")[0].style.display = none;
         }
       }
     };
-    xhr.open("GET", "session_chk.php", true);
+    xhr.open("GET", "php/session_chk.php", true);
     xhr.send();
   }
 }

@@ -14,11 +14,7 @@
     </script>
 
     <!--Font Awesome-->
-    <script
-      src="https://kit.fontawesome.com/1b23483256.js"
-      crossorigin="anonymous"
-    ></script>
-
+    <link rel="stylesheet" type="text/css" href="css/all.css" />
     <!--Google fonts-->
     <link
       href="https://fonts.googleapis.com/css?family=Candal|Lora"
@@ -33,7 +29,7 @@
         }
 
         xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
+          if (this.readyState == 4) {
             if (this.responseText != false) {
               var uname = this.responseText;
               var nav_user = document.getElementsByClassName("nav-user")[0];
@@ -47,7 +43,7 @@
             }
           }
         };
-        xhr.open("GET", "session_chk.php", true);
+        xhr.open("GET", "php/session_chk.php", true);
         xhr.send();
       }
     </script>
@@ -59,7 +55,7 @@
           var xhr = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
+          if (this.readyState == 4) {
             if (this.responseText != false) {
               var res = this.responseText;
               var nav_user = document.getElementsByClassName("nav-user")[0];
@@ -70,7 +66,7 @@
             }
           }
         };
-        xhr.open("GET", "logout.php", true);
+        xhr.open("GET", "php/logout.php", true);
         xhr.send();
       }
     </script>
@@ -78,7 +74,7 @@
       function cart_chk() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
+          if (this.readyState == 4) {
             if (this.responseText != false) {
               var res = this.responseText;
               document.getElementsByClassName(
@@ -87,7 +83,7 @@
             }
           }
         };
-        xhr.open("GET", "cart_chk.php", true);
+        xhr.open("GET", "php/cart_chk.php", true);
         xhr.send();
       }
     </script>
@@ -136,14 +132,16 @@
       <div class="sidebar">
         <div class="section search">
           <h2 class="section-title">Search</h2>
-          <form action="index.html" method="post">
+          <form>
             <input
               type="text"
               name="search-term"
               class="text-input"
               placeholder="Search...."
+              onkeyup="showResult(this.value)"
             />
           </form>
+          <div id="livesearch" class="livesearch"></div>
         </div>
 
         <div class="section catagories">
