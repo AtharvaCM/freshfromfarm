@@ -1,0 +1,83 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "no" ?>
+<pages>
+    <link>
+        <title>Potato</title>
+        <url>order.html</url>
+    </link>
+    <link>
+        <title>Onion</title>
+        <url>order.html</url>
+    </link>
+    <link>
+        <title>Tomato</title>
+        <url>order.html</url>
+    </link>
+    <link>
+        <title>Garlic</title>
+        <url>order.html</url>
+    </link>
+    <link>
+        <title>Carrot</title>
+        <url>order_root.html</url>
+    </link>
+    <link>
+        <title>Raddish</title>
+        <url>order_root.html</url>
+    </link>
+    <link>
+        <title>Beets</title>
+        <url>order_root.html</url>
+    </link>
+    <link>
+        <title>Sweet Potato</title>
+        <url>order_root.html</url>
+    </link>
+    <link>
+    <title>Capsicum</title>
+        <url>order_fruit.html</url>
+    </link>
+    <link>
+        <title>Eggplant</title>
+        <url>order_fruit.html</url>
+    </link>
+    <link>
+        <title>Gourd</title>
+        <url>order_fruit.html</url>
+    </link>
+    <link>
+        <title>String Beans</title>
+        <url>order_fruit.html</url>
+    </link>
+    <link>
+        <title>Green Peas</title>
+        <url>order_seed.html</url>
+    </link>
+    <link>
+        <title>Soybean</title>
+        <url>order_seed.html</url>
+    </link>
+    <link>
+        <title>French Beans</title>
+        <url>order_seed.html</url>
+    </link>
+    <link>
+        <title>Edamame Beans</title>
+        <url>order_seed.html</url>
+    </link>
+    <link>
+        <title>Spinach</title>
+        <url>order_leaves.html</url>
+    </link>
+    <link>
+        <title>Lettuce</title>
+        <url>order_leaves.html</url>
+    </link>
+    <link>
+        <title>Cabbage</title>
+        <url>order_leaves.html</url>
+    </link>
+    <link>
+        <title>Fenugreek</title>
+        <url>order_leaves.html</url>
+    </link>
+</pages>
