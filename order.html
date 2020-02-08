@@ -12,46 +12,14 @@
         document.body.style.background = "rgb(240,240,240)";
       }
     </script>
-
     <!--Font Awesome-->
-    <script
-      src="https://kit.fontawesome.com/1b23483256.js"
-      crossorigin="anonymous"
-    ></script>
 
+    <link rel="stylesheet" type="text/css" href="css/all.css" />
     <!--Google fonts-->
     <link
       href="https://fonts.googleapis.com/css?family=Candal|Lora"
       rel="stylesheet"
     />
-    <script>
-      function session_chk() {
-        if (window.XMLHttpRequest) {
-          var xhr = new XMLHttpRequest();
-        } else {
-          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
-            console.log(this.responseText);
-            if (this.responseText != false) {
-              var uname = this.responseText;
-              var nav_user = document.getElementsByClassName("nav-user")[0];
-              var nav_user_name = document.getElementsByClassName(
-                "nav-username"
-              )[0];
-              nav_user.style.display = "block";
-              nav_user_name.innerHTML = uname;
-              document.getElementsByClassName("nav-login")[0].style.display =
-                "none";
-            }
-          }
-        };
-        xhr.open("GET", "session_chk.php", true);
-        xhr.send();
-      }
-    </script>
     <script>
       function logout() {
         if (window.XMLHttpRequest) {
@@ -60,7 +28,7 @@
           var xhr = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
+          if (this.readyState == 4) {
             if (this.responseText != false) {
               var res = this.responseText;
               var nav_user = document.getElementsByClassName("nav-user")[0];
@@ -71,26 +39,33 @@
             }
           }
         };
-        xhr.open("GET", "logout.php", true);
+        xhr.open("GET", "php/logout.php", true);
         xhr.send();
       }
     </script>
-
     <script>
-      function cart_chk() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-          if (this.readyState == 4 || this.status == 200) {
-            if (this.responseText != false) {
-              var res = this.responseText;
-              document.getElementsByClassName(
-                "cart-item-no"
-              )[0].innerHTML = res;
-            }
+      function showResult(str) {
+        if (str.length == 0) {
+          document.getElementById("livesearch").innerHTML = "";
+          document.getElementById("livesearch").style.border = "0px";
+          return;
+        }
+        if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp = new XMLHttpRequest();
+        } else {
+          // code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+            document.getElementById("livesearch").innerHTML = this.responseText;
+            document.getElementById("livesearch").style.border =
+              "1px solid #A5ACB2";
           }
         };
-        xhr.open("GET", "cart_chk.php", true);
-        xhr.send();
+        xmlhttp.open("GET", "php/livesearch.php?q=" + str, true);
+        xmlhttp.send();
       }
     </script>
   </head>
@@ -138,14 +113,16 @@
       <div class="sidebar">
         <div class="section search">
           <h2 class="section-title">Search</h2>
-          <form action="index.html" method="post">
+          <form>
             <input
               type="text"
               name="search-term"
               class="text-input"
               placeholder="Search...."
+              onkeyup="showResult(this.value)"
             />
           </form>
+          <div id="livesearch" class="livesearch"></div>
         </div>
 
         <div class="section catagories">
