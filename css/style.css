@@ -415,9 +415,35 @@ input[type="email"] {
   margin-bottom: 20px;
   background: rgba(0, 0, 0, 0.3);
 }
-/*.content .sidebar .section.search { /*no space between .section.search*
-    margin-top: 80px;/*to make the sidebar go a bit down*
-}*/
+.livesearch {
+  background: #ececec;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.hint-list {
+  text-decoration: none;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+}
+.hint-list li {
+  width: 100%;
+  font-size: large;
+  margin: 10px;
+}
+.hints {
+  width: 100%;
+  font-family: "Lora", serif;
+
+  color: #343a40;
+}
+.hints:hover {
+  /*no space between .section.search*/
+  color: green;
+  width: 100%;
+  transition: 0.3s ease;
+}
 .content .sidebar .section.catagories ul {
   margin: 0px;
   padding: 0px;
