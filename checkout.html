@@ -6,8 +6,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
     <link rel="icon" href="../../../../favicon.ico" />
 
     <title>Checkout example for Bootstrap</title>
@@ -20,152 +18,19 @@
 
     <!--Font Awesome-->
     <link rel="stylesheet" type="text/css" href="css/all.css" />
+    <script src="js/smtp.js" type="text/javascript"></script>
 
     <!--Google fonts-->
     <link
       href="https://fonts.googleapis.com/css?family=Candal|Lora"
       rel="stylesheet"
     />
-    <script>
-      function session_chk() {
-        if (window.XMLHttpRequest) {
-          var xhr = new XMLHttpRequest();
-        } else {
-          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
-        }
+    <script src="js/main.js" type="text/javascript"></script>
 
-        xhr.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.responseText != false) {
-              var uname = this.responseText;
-              var nav_user = document.getElementsByClassName("nav-user")[0];
-              var nav_user_name = document.getElementsByClassName(
-                "nav-username"
-              )[0];
-              nav_user.style.display = "block";
-              nav_user_name.innerHTML = uname;
-              document.getElementsByClassName("nav-login")[0].style.display =
-                "none";
-            }
-          }
-        };
-        xhr.open("GET", "php/session_chk.php", true);
-        xhr.send();
-      }
-    </script>
-    <script>
-      function logout() {
-        if (window.XMLHttpRequest) {
-          var xhr = new XMLHttpRequest();
-        } else {
-          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xhr.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.responseText != false) {
-              var res = this.responseText;
-              var nav_user = document.getElementsByClassName("nav-user")[0];
-              nav_user.style.display = "none";
-              document.getElementsByClassName("nav-login")[0].style.display =
-                "block";
-            }
-          }
-        };
-        xhr.open("GET", "php/logout.php", true);
-        xhr.send();
-      }
-    </script>
-    <script>
-      function cart_chk() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.responseText != false) {
-              var res = this.responseText;
-              document.getElementsByClassName(
-                "cart-item-count"
-              )[0].innerHTML = res;
-            }
-          }
-        };
-        xhr.open("GET", "php/cart_chk.php", true);
-        xhr.send();
-      }
-    </script>
-    <script>
-      function getCart() {
-        var xhttp;
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            //document.getElementById("yo").innerHTML = this.responseText;
-            var txt = this.responseText;
-            var res = txt.split(",");
-            console.log(txt);
-            //res[0] contains 1 item now
-            for (i = 0; i < res.length - 1; i++) {
-              ans = res[i].split(" ");
-              console.log(ans);
-              var title = ans[1];
-              var price = ans[2];
-              var qty = ans[3];
-              console.log(title, price, qty);
-
-              var cartItems = document.getElementsByClassName(
-                "chk-cart-items"
-              )[0];
-              var cartRow = document.createElement("li");
-              cartRow.classList.add(
-                "list-group-item",
-                "d-flex",
-                "justify-content-between",
-                "lh-condensed",
-                "chk-cart-row"
-              );
-              var cartRowContents = `
-                <div>
-                  <h6 class="my-0">${title}</h6>
-                  <small class="text-muted chk-cart-quantity-input">x${qty}</small>
-                </div>
-                <span class="text-muted chk-cart-price">₹${price}</span>`;
-              cartRow.innerHTML = cartRowContents;
-              cartItems.append(cartRow);
-              updateCartTotal();
-            }
-          }
-        };
-        xhttp.open("GET", "php/chkAddToCart.php", true);
-        xhttp.send();
-      }
-      function updateCartTotal() {
-        var cartItemContainer = document.getElementsByClassName(
-          "chk-cart-items"
-        )[0];
-        var cartRows = cartItemContainer.getElementsByClassName("chk-cart-row");
-        var total = 0;
-        for (var i = 0; i < cartRows.length; i++) {
-          var cartRow = cartRows[i];
-          var priceElement = cartRow.getElementsByClassName("chk-cart-price")[0]
-            .innerText;
-          var qtyElement = cartRow.getElementsByClassName(
-            "chk-cart-quantity-input"
-          )[0].innerText;
-          console.log(
-            "priceElement = " + priceElement + ", qtyElement = " + qtyElement
-          );
-          var price = parseFloat(priceElement.replace("₹", ""));
-          var qty = parseFloat(qtyElement.replace("x", ""));
-          total = total + price * qty;
-        }
-        total = Math.round(total * 100) / 100;
-        document.getElementsByClassName("cart-total-price")[0].innerText =
-          "₹" + total;
-      }
-    </script>
     <link rel="stylesheet" href="css/style.css" />
   </head>
 
-  <body class="bg-light" onload="session_chk(), cart_chk(), getCart()">
+  <body class="bg-light" onload="session_chk(), getCart(), chkout_cart_chK()">
     <header>
       <span onclick="window.location.href='index.html'">
         <div class="logo">
@@ -256,8 +121,8 @@
             </li>-->
 
             <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong class="cart-total-price">$20</strong>
+              <span>Total (INR)</span>
+              <strong class="cart-total-price">₹0</strong>
             </li>
           </ul>
 
@@ -277,7 +142,7 @@
 
         <div class="col-md-8 order-md-1">
           <h4 class="mb-3">Billing address</h4>
-          <form class="needs-validation" novalidate>
+          <form class="needs-validatio" novalidate>
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
@@ -310,6 +175,25 @@
             </div>
 
             <div class="mb-3">
+              <label for="username">Mobile No</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">+91</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="mob"
+                  placeholder="Mobile No"
+                  required
+                />
+                <div class="invalid-feedback" style="width: 100%;">
+                  Your Mobile No is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
               <label for="username">Username</label>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -328,20 +212,19 @@
               </div>
             </div>
 
-            <div class="mb-3">
-              <label for="email"
-                >Email <span class="text-muted">(Optional)</span></label
-              >
+            <!--<div class="mb-3">
+              <label for="email">Email</label>
               <input
-                type="email"
+                type="text"
                 class="form-control"
                 id="email"
                 placeholder="you@example.com"
+                required
               />
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
-            </div>
+            </div>-->
 
             <div class="mb-3">
               <label for="address">Address</label>
@@ -369,7 +252,7 @@
               />
             </div>
 
-            <div class="row">
+            <!--<div class="row">
               <div class="col-md-5 mb-3">
                 <label for="country">Country</label>
                 <select
@@ -407,7 +290,7 @@
                   Zip code required.
                 </div>
               </div>
-            </div>
+            </div>-->
             <hr class="mb-4" />
             <div class="custom-control custom-checkbox">
               <input
@@ -437,7 +320,7 @@
               <div class="custom-control custom-radio">
                 <input
                   id="credit"
-                  name="paymentMethod"
+                  name="paymentMethod1"
                   type="radio"
                   class="custom-control-input"
                   checked
@@ -450,7 +333,7 @@
               <div class="custom-control custom-radio">
                 <input
                   id="debit"
-                  name="paymentMethod"
+                  name="paymentMethod1"
                   type="radio"
                   class="custom-control-input"
                   required
@@ -462,7 +345,7 @@
               <div class="custom-control custom-radio">
                 <input
                   id="paypal"
-                  name="paymentMethod"
+                  name="paymentMethod1"
                   type="radio"
                   class="custom-control-input"
                   required
@@ -530,10 +413,10 @@
             <hr class="mb-4" />
             <button
               class="btn btn-primary btn-lg btn-block"
-              type="submit"
-              onclick="window.location.href='cart.html'"
+              type="button"
+              onclick="place_order()"
             >
-              Continue to checkout
+              Place Order
             </button>
           </form>
         </div>
@@ -552,20 +435,17 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
+    <script src="js/jquery.min.js"></script>
     <script>
       window.jQuery ||
         document.write(
           '<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>'
         );
     </script>
+    --
     <script src="../../../../assets/js/vendor/popper.min.js"></script>
     <script src="../../../../dist/js/bootstrap.min.js"></script>
-    <script src="../../../../assets/js/vendor/holder.min.js"></script>
+    <!--<script src="../../../../assets/js/vendor/holder.min.js"></script>
     <script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
       (function() {
@@ -595,6 +475,6 @@
           false
         );
       })();
-    </script>
+    </script>-->
   </body>
 </html>

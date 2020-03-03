@@ -5,69 +5,19 @@
 
   <head>
     <meta charset="UTF-8" />
+    <!--Encoding method UTF-8-->
     <meta name="viewport" content="device-width, initial-scale = 1.0" />
     <meta http-equiv="X-UA-compatible" content="ie=edge" />
     <title>FreshFromFarm (FFF)</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/all.css" />
 
-    <!--Font Awesome--
-    <script src="js/all.js" crossorigin="anonymous"></script>-->
     <!--Google fonts-->
     <link
       href="https://fonts.googleapis.com/css?family=Candal|Lora"
       rel="stylesheet"
     />
-
-    <script>
-      function session_chk() {
-        if (window.XMLHttpRequest) {
-          var xhr = new XMLHttpRequest();
-        } else {
-          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xhr.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.responseText != false) {
-              var uname = this.responseText;
-              var nav_user = document.getElementsByClassName("nav-user")[0];
-              var nav_user_name = document.getElementsByClassName(
-                "nav-username"
-              )[0];
-              nav_user.style.display = "block";
-              nav_user_name.innerHTML = uname;
-              document.getElementsByClassName("nav-login")[0].style.display =
-                "none";
-            }
-          }
-        };
-        xhr.open("GET", "php/session_chk.php", true);
-        xhr.send();
-      }
-    </script>
-    <script>
-      function logout() {
-        if (window.XMLHttpRequest) {
-          var xhr = new XMLHttpRequest();
-        } else {
-          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xhr.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.responseText != false) {
-              var res = this.responseText;
-              var nav_user = document.getElementsByClassName("nav-user")[0];
-              nav_user.style.display = "none";
-              document.getElementsByClassName("nav-login")[0].style.display =
-                "block";
-            }
-          }
-        };
-        xhr.open("GET", "php/logout.php", true);
-        xhr.send();
-      }
-    </script>
+    <script src="js/main.js" type="text/javascript"></script>
   </head>
 
   <body onload="session_chk()">
@@ -161,22 +111,20 @@
     </div>
     <!--//Footer-->
 
-    <!--JQuery-->
+    <!--JQuery--
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"
-    ></script>
+    ></script>-->
+    <script src="js/jquery.min.js"></script>
 
     <!--Slick Carousel--
     <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-    ></script>-->
-    <script
-      type="text/javascript"
       src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-    ></script>
+    ></script>-->
+    <script src="js/slick.min.js"></script>
 
     <!--Custom Script-->
     <script src="js/scripts.js"></script>
