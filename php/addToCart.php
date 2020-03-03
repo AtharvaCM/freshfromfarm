@@ -28,6 +28,7 @@
     }
     echo " $answer3[0]";
 
+    pg_close($dbconn);
   /*  $query2 = "";
     $result2 = pg_query($dbconn, $query2) or die("Item already in cart!");
     $answer2 = @pg_fetch_row($result2);

@@ -22,4 +22,6 @@
     $result3 = pg_query($dbconn, $query3) or die("unable to fetch query");
     $answer3 = @pg_fetch_row($result3);
     echo $answer3[0];
+
+    pg_close($dbconn);
 ?>

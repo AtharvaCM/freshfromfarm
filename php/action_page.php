@@ -24,4 +24,5 @@
     echo " $row[3] r4";
     echo " $row[4] r5";
 
+    pg_close($dbconn);
 ?>

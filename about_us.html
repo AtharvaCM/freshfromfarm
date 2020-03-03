@@ -25,55 +25,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <script>
-      function session_chk() {
-        if (window.XMLHttpRequest) {
-          var xhr = new XMLHttpRequest();
-        } else {
-          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xhr.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.responseText != false) {
-              var uname = this.responseText;
-              var nav_user = document.getElementsByClassName("nav-user")[0];
-              var nav_user_name = document.getElementsByClassName(
-                "nav-username"
-              )[0];
-              nav_user.style.display = "block";
-              nav_user_name.innerHTML = uname;
-              document.getElementsByClassName("nav-login")[0].style.display =
-                "none";
-            }
-          }
-        };
-        xhr.open("GET", "php/session_chk.php", true);
-        xhr.send();
-      }
-    </script>
-    <script>
-      function logout() {
-        if (window.XMLHttpRequest) {
-          var xhr = new XMLHttpRequest();
-        } else {
-          var xhr = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xhr.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.responseText != false) {
-              var res = this.responseText;
-              var nav_user = document.getElementsByClassName("nav-user")[0];
-              nav_user.style.display = "none";
-              document.getElementsByClassName("nav-login")[0].style.display =
-                "block";
-            }
-          }
-        };
-        xhr.open("GET", "php/logout.php", true);
-        xhr.send();
-      }
-    </script>
+    <script src="js/main.js" type="text/javascript"></script>
   </head>
 
   <body onload="session_chk()">
