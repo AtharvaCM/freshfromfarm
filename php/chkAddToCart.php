@@ -27,8 +27,6 @@
     }
     echo " $answer3[0]";
 
-  /*  $query2 = "";
-    $result2 = pg_query($dbconn, $query2) or die("Item already in cart!");
-    $answer2 = @pg_fetch_row($result2);
-    echo "Item added in cart!";*/
+    pg_close($dbconn);
+
 ?>

@@ -9,4 +9,6 @@
     $result1 = @pg_query($dbconn, $query1) or die("error");
     $answer1= @pg_fetch_row($result1);
     echo $answer1[0];
+
+    pg_close($dbconn);
 ?>

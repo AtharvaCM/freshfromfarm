@@ -12,7 +12,7 @@
     // setting the date variable to get the current date
     $cdate=getdate();
     $date_val=array_values($cdate);
-    $date=$date_val[3]."/".$date_val[5]."/".$date_val[6];
+    $date=$date_val[5]."/".$date_val[3]."/".$date_val[6];
 
     if( (strcmp($password,$passwordConf))==0 )
     {
@@ -36,6 +36,7 @@
             if($row[0] == $username)
             {
                 echo "Username already present! meh!";
+                pg_close($dbconn);
                 return;
             }
         }
@@ -45,14 +46,17 @@
         if( $result2 = @pg_query($dbconn, $query2) )
         {
             echo "success";
+            pg_close($dbconn);
         }
         else
         {
+            pg_close($dbconn);
             die("failed to insert");
         }
     }
     else
     {
+        pg_close($dbconn);
         echo "passwords dont match";
     }
 ?>

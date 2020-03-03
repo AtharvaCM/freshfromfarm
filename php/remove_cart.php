@@ -21,5 +21,7 @@
     $query3 = "delete from cart where user_id = '$answer1[0]' and product_id='$answer2[0]';";
     $result3 = pg_query($dbconn, $query3) or die("unable to fetch query");
     $answer3 = @pg_fetch_row($result3);
-    echo "Item deleted!";   
+    echo "Item deleted!";
+
+    pg_close($dbconn);
 ?>
