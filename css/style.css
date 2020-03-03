@@ -245,6 +245,14 @@ header .menu-toggle {
 .signup-body {
   height: 60vmax;
 }
+.input-form p,
+button,
+.reg p {
+  color: wheat;
+}
+.regbtn {
+  color: white;
+}
 .signup-cont {
   min-height: calc(100vh - 66px);
   position: relative;
@@ -362,7 +370,8 @@ input[type="email"] {
   border-radius: 20px;
   float: left;
 }
-.login-box .cancelbtn:hover {
+.login-box .cancelbtn:hover,
+.regbtn:hover {
   opacity: 0.8;
   cursor: pointer;
 }
@@ -392,7 +401,7 @@ input[type="email"] {
   border-radius: 20px;
   margin-top: 8px;
 }
-/****** ORDER PAGE CSS ******/
+/******--------------- ORDER PAGE CSS ------------------------******/
 .content {
   width: 90%;
   height: auto;
@@ -407,6 +416,7 @@ input[type="email"] {
   width: 30%;
   float: left;
   height: 300px;
+  margin-top: 10px;
 }
 .content .sidebar .section {
   background: white;
@@ -414,6 +424,9 @@ input[type="email"] {
   border-radius: 5px;
   margin-bottom: 20px;
   background: rgba(0, 0, 0, 0.3);
+}
+.content .sidebar .section:hover {
+  box-shadow: 5px 5px 5px 0px rgb(41, 40, 40);
 }
 .livesearch {
   background: #ececec;
@@ -455,9 +468,10 @@ input[type="email"] {
   /*border: 1px solid red;*/
   border-bottom: 1px solid white;
   font-weight: bold;
+  color: whitesmoke;
 }
 .content .sidebar .section.catagories ul li a:hover {
-  color: white;
+  color: #0e94a0;
 }
 
 .content .main-content {
@@ -478,6 +492,9 @@ input[type="email"] {
   background: white;
   border-radius: 5px; /*Removes pointy edges*/
   box-shadow: 1rem 1rem 1rem -1rem #00000033;
+}
+.content .main-content .item:hover {
+  box-shadow: 5px 5px 5px 0px rgb(41, 40, 40);
 }
 .content .main-content .item .item-image {
   width: 100%;
@@ -507,6 +524,7 @@ input[type="email"] {
 .content .main-content .item .item-info .itm-btn .itm-btn-txt {
   margin: 0px;
   padding: 0px;
+  color: white;
 }
 #cart {
   color: #000;
@@ -525,13 +543,17 @@ h4 {
   clear: both;
 }
 .content .chkout .chkout-btn {
+  text-align: center;
+  vertical-align: middle;
   font-size: 35px;
   position: relative;
   left: 35%;
-  background: #a8ff9c;
+  background: #86f377;
+  color: white;
   border: none;
   border-radius: 20px;
-  box-shadow: 1rem 1rem 1rem -1rem #0aa02333;
+  padding: 0.2em 0.2em;
+  box-shadow: 1rem 1rem 1rem -1rem black;
 }
 .content .chkout .chkout-btn:hover {
   background: #39dc79;
@@ -568,6 +590,7 @@ body {
 
 .content-section {
   margin: 1em;
+  /*border: 1px solid red;*/
 }
 
 .container {
@@ -735,10 +758,21 @@ body {
   color: #333;
   font-size: 1.1em;
 }
-
+.cont-shop-btn {
+  display: block;
+  margin: 10px auto 0px auto;
+  color: white;
+  background-color: #5c7983;
+  border: none;
+  border-radius: 0.3em;
+  font-weight: bold;
+}
+.cont-shop-btn:hover {
+  background-color: #2d9cdb;
+}
 .btn-purchase {
   display: block;
-  margin: 40px auto 80px auto;
+  margin: 30px auto 80px auto;
   font-size: 1.75em;
 }
 
