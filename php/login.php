@@ -12,8 +12,8 @@
     $result1 = pg_query($dbconn, $query1) or die("unable to fetch query");
     $result2 = pg_query($dbconn, $query2) or die("unable to fetch query");
 
-    $answer1=@pg_fetch_row($result1);
-    $answer2=@pg_fetch_row($result2);
+    $answer1=@pg_fetch_row($result1) or die("unable to fetch 1");
+    $answer2=@pg_fetch_row($result2) or die("unable to fetch 2");
     if($username===$answer1[0] && $password===$answer2[0])
     {
         echo "username = ".$answer1[0]."<br>";
